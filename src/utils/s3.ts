@@ -23,7 +23,9 @@ export const getPutSignedUrl = async ({
     ContentType: contentType,
   });
 
-  return await getSignedUrl(s3, command, { expiresIn: 300 }); // 5 Min
+  const url = await getSignedUrl(s3, command, { expiresIn: 300 }); // 5 Min
+
+  return { url, key };
 };
 
 export const getGetSignedUrl = async ({ key }: SignedURLArgs) => {
