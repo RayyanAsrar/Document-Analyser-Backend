@@ -46,8 +46,7 @@ const errorHandler = (
   else if (error.name === "JsonWebTokenError") {
     statusCode = 401;
     errorMessage = "Invalid token";
-  }
-  else if (error.name === "TokenExpiredError") {
+  } else if (error.name === "TokenExpiredError") {
     statusCode = 401;
     errorMessage = "Token expired";
   }
