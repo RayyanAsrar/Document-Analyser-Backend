@@ -1,8 +1,8 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, model } from "mongoose";
 import { File } from "../schemas/file.schema";
 
 export interface IFile extends Document, File {
-  userID: string;
+  userID: mongoose.Types.ObjectId;
   extractedText: string;
   summary: string;
 }
@@ -14,7 +14,8 @@ const fileSchema = new Schema<IFile>(
       required: true,
     },
     userID: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
       index: true,
     },
@@ -50,5 +51,5 @@ const fileSchema = new Schema<IFile>(
   }
 );
 
-const File = mongoose.model<IFile>("File", fileSchema);
-export default File;
+const FileModel = model<IFile>("File", fileSchema);
+export default FileModel;

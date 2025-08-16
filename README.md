@@ -16,7 +16,7 @@ A comprehensive Node.js backend application for intelligent document analysis wi
 ### Technical Features
 
 - **TypeScript**: Full TypeScript implementation with type safety
-- **MongoDB Integration**: Mongoose ODM for data persistence
+- **MongoDB Integration**: Mongoose ODM with proper ObjectId references
 - **AWS S3 Integration**: Secure file storage and retrieval
 - **Google Gemini AI**: Advanced AI-powered document analysis
 - **JWT Authentication**: Secure token-based authentication
@@ -41,17 +41,28 @@ A comprehensive Node.js backend application for intelligent document analysis wi
 
 ```
 src/
-├── config/          # Configuration files (DB, S3, Gemini AI)
-├── controller/      # Request handlers
+├── config/          # Configuration files (DB, S3, Gemini AI, Environment)
+├── controller/      # Request handlers (Auth, File, Upload, User)
 ├── middlewares/     # Custom middleware (auth, error handling)
-├── models/          # MongoDB schemas
+├── models/          # MongoDB schemas with TypeScript interfaces
 ├── routes/          # API route definitions
 ├── schemas/         # Zod validation schemas
 ├── services/        # Business logic (Gemini AI service)
 ├── types/           # TypeScript type definitions
-├── utils/           # Utility functions
+├── utils/           # Utility functions (PDF extraction, tokens, validation)
+├── app.ts           # Express application setup
 └── index.ts         # Application entry point
 ```
+
+### Database Models
+
+The application uses three main models with proper MongoDB ObjectId references:
+
+- **User Model**: User authentication and profile management
+- **File Model**: Document storage with user references and AI analysis results
+- **Chat Model**: Document-based chat sessions with user and file references
+
+All models use TypeScript interfaces and Zod schemas for type safety and validation.
 
 ## 📋 API Endpoints
 
@@ -64,12 +75,12 @@ src/
 
 - `POST /api/upload/generate-upload-url` - Generate S3 upload URL
 - `POST /api/upload/generate-download-url` - Generate S3 download URL
-- `POST /api/files/process` - Process uploaded PDF with AI analysis
+- `POST /api/file/process` - Process uploaded PDF with AI analysis
 
 ### User Management
 
-- `GET /api/users/profile` - Get user profile
-- `PUT /api/users/profile` - Update user profile
+- `GET /api/user/profile` - Get user profile
+- `PUT /api/user/profile` - Update user profile
 
 ## 🔧 PDF Processing Workflow
 
@@ -164,7 +175,7 @@ GEMINI_API_KEY=your_gemini_api_key
 ### File Processing Request
 
 ```json
-POST /api/files/process
+POST /api/file/process
 {
   "key": "s3-file-key",
   "name": "document.pdf",
@@ -184,12 +195,12 @@ POST /api/files/process
       "fileName": "document.pdf",
       "extractedText": "...",
       "summary": "AI-generated summary...",
-      "userID": "user_id",
+      "userID": "user_object_id",
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     "chat": {
-      "userID": "user_id",
-      "fileID": "file_id",
+      "userID": "user_object_id",
+      "fileID": "file_object_id",
       "isDeleted": false,
       "isArchived": false
     }
@@ -213,6 +224,15 @@ POST /api/files/process
 - Prettier for code formatting
 - Comprehensive error handling
 - Input validation with Zod
+- Proper MongoDB ObjectId references
+
+### Recent Improvements
+
+- **Enhanced Models**: Updated all models to use proper MongoDB ObjectId references
+- **Type Safety**: Improved TypeScript interfaces and type definitions
+- **Schema Validation**: Added comprehensive Zod schemas for all models
+- **Code Structure**: Better organization with destructured imports
+- **Database Relations**: Proper foreign key relationships between models
 
 ## 📄 License
 

@@ -1,14 +1,21 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { Schema, model, Document } from "mongoose";
+import { Chat } from "../schemas/chat.schema";
 
-const chatSchema = new Schema(
+export interface IChat extends Document, Chat {
+  userID: mongoose.Types.ObjectId;
+  fileID: mongoose.Types.ObjectId;
+}
+
+const chatSchema = new Schema<IChat>(
   {
     userID: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
-      index: true,
     },
     fileID: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "File",
       required: true,
     },
     isDeleted: {
@@ -27,5 +34,5 @@ const chatSchema = new Schema(
   }
 );
 
-const Chat = mongoose.model("Chat", chatSchema);
-export default Chat;
+const ChatModel = model<IChat>("Chat", chatSchema);
+export default ChatModel;
