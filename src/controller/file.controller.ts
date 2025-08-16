@@ -1,17 +1,17 @@
-import { Request, Response } from "express";
-import validate from "@/utils/validation";
-import { fileSchema } from "@/schemas/file.schema";
-import { APIResponse } from "@/utils/response";
-import CustomError from "http-errors";
-import { extractPDF } from "@/utils/pdfExtractor";
-import { downloadFileFromS3 } from "@/utils/s3";
-import { getSummaryPrompt } from "@/utils/prompt";
-import * as GeminiService from "@/services/gemini.service";
-import File from "@/models/file.model";
 import Chat from "@/models/chat.model";
+import File from "@/models/file.model";
+import { fileSchema } from "@/schemas/file.schema";
+import * as GeminiService from "@/services/gemini.service";
+import { extractPDF } from "@/utils/pdfExtractor";
+import { getSummaryPrompt } from "@/utils/prompt";
+import { APIResponse } from "@/utils/response";
+import { downloadFileFromS3 } from "@/utils/s3";
+import validate from "@/utils/validation";
+import { Request, Response } from "express";
+import CustomError from "http-errors";
 
 const fileController = {
-  async processFile(req: Request, res: Response) {
+  async processFile(req: Request, res: Response): Promise<Response> {
     const { id } = req.user;
     const { data, error, success } = validate(fileSchema, req.body);
 
@@ -39,8 +39,8 @@ const fileController = {
 
     const file = await File.create(fileData);
 
-    if(!file) {
-        throw CustomError(400, "File not Uploaded")
+    if (!file) {
+      throw CustomError(400, "File not Uploaded");
     }
 
     const chatData = {
@@ -52,8 +52,8 @@ const fileController = {
 
     const chat = await Chat.create(chatData);
 
-    if(!chat) {
-        throw CustomError(400, "Chat not Initialized")
+    if (!chat) {
+      throw CustomError(400, "Chat not Initialized");
     }
 
     return res.status(200).send(
@@ -62,6 +62,20 @@ const fileController = {
         chat,
       })
     );
+  },
+  async getAllFiles(req: Request, res: Response): Promise<Response> {
+    const { id } = req.user;
+
+    const filters = { isDeleted: false, userID: id };
+    const files = await File.find(filters);
+
+    if (!files) {
+      throw CustomError(400, "Files not Found");
+    }
+
+    return res
+      .status(200)
+      .json(new APIResponse("Files Fetched Successfully", files));
   },
 };
 

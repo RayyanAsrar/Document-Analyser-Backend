@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { APIError } from "@/utils/response";
 
+// TODO: Fix Error Middleware
+
 const errorHandler = (
   error: any,
   req: Request,
