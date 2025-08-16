@@ -4,7 +4,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import connectDB from "@/config/database";
 import errorHandler from "@/middlewares/error.middleware";
-import { authRouter, uploadRouter, userRouter } from "@/routes";
+import { authRouter, uploadRouter, userRouter, fileRouter } from "@/routes";
 import { APIResponse } from "@/utils/response";
 
 const app = express();
@@ -36,6 +36,7 @@ app.get("/health", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/upload", uploadRouter);
+app.use("/api/file", fileRouter);
 
 //Global Error handler
 app.use(errorHandler);

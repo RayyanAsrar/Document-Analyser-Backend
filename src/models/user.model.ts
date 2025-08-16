@@ -1,7 +1,9 @@
-import { model, Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 import { UserSchema } from "@/schemas/user.schema";
 
-const userSchema = new Schema<UserSchema>(
+export interface IUser extends Document, UserSchema {}
+
+const userSchema = new Schema<IUser>(
   {
     username: {
       type: String,
@@ -35,9 +37,9 @@ const userSchema = new Schema<UserSchema>(
       default: "user",
     },
     isDeleted: {
-        type: Boolean,
-        default: false
-    }
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: {
@@ -47,5 +49,5 @@ const userSchema = new Schema<UserSchema>(
   }
 );
 
-const User = model<UserSchema>("User", userSchema);
+const User = mongoose.model<IUser>("User", userSchema);
 export default User;

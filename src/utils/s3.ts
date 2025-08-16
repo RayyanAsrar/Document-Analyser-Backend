@@ -35,3 +35,29 @@ export const getGetSignedUrl = async ({ key }: SignedURLArgs) => {
   });
   return await getSignedUrl(s3, command);
 };
+
+export const downloadFileFromS3 = async (key: string): Promise<Buffer> => {
+  try {
+    const command = new GetObjectCommand({
+      Bucket: AWS_BUCKET_NAME,
+      Key: key,
+    });
+
+    const response = await s3.send(command);
+
+    if (!response.Body) {
+      throw new Error("No file content received from S3");
+    }
+
+    const chunks: Uint8Array[] = [];
+    const stream = response.Body as any;
+
+    return new Promise((resolve, reject) => {
+      stream.on("data", (chunk: Uint8Array) => chunks.push(chunk));
+      stream.on("end", () => resolve(Buffer.concat(chunks)));
+      stream.on("error", reject);
+    });
+  } catch (error) {
+    throw new Error(`Failed to download file from S3: ${error}`);
+  }
+};
