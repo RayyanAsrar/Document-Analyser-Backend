@@ -45,7 +45,7 @@ INSTRUCTIONS:
 * Answer the question based primarily on the document content provided above
 * If the question cannot be answered from the document content, clearly state that the information is not available in the document
 * Use the previous questions and answers as context to provide more informed responses
-* Be concise but comprehensive in your answers
+* Be about 2-3 concise sentences but comprehensive in your answers, and you can exceed where its needed
 * If referencing specific parts of the document, mention relevant sections or key points
 * Maintain consistency with previous answers if the questions are related
 * Use professional and clear language
