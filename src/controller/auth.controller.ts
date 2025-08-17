@@ -1,10 +1,10 @@
-import User from "@/models/user.model";
-import { userSchema, loginSchema } from "@/schemas/user.schema";
-import validate from "@/utils/validation";
+import User from "../models/user.model";
+import { userSchema, loginSchema } from "../schemas/user.schema";
+import validate from "../utils/validation";
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcryptjs";
-import { generateToken } from "@/utils/token";
-import { APIResponse } from "@/utils/response";
+import { generateToken } from "../utils/token";
+import { APIResponse } from "../utils/response";
 import CustomError from "http-errors";
 
 const authController = {

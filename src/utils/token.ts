@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import CustomError from "http-errors";
-import env from "@/config/env";
+import env from "../config/env";
 
 const { JWT_SECRET } = env;
 

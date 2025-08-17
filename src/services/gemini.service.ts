@@ -1,4 +1,4 @@
-import geminiGenAIClient from "@/config/geminiGenAIClient";
+import geminiGenAIClient from "../config/geminiGenAIClient";
 
 const modelName = "gemini-2.5-flash";
 

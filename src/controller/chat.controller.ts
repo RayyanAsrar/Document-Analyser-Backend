@@ -1,10 +1,9 @@
-import mongoose from "mongoose";
-import Chat from "@/models/chat.model";
-import File from "@/models/file.model";
-import Question from "@/models/questions.model";
-import { APIResponse } from "@/utils/response";
 import { Request, Response } from "express";
 import CustomError from "http-errors";
+import mongoose from "mongoose";
+import Chat from "../models/chat.model";
+import Question from "../models/questions.model";
+import { APIResponse } from "../utils/response";
 
 const chatController = {
   async getAllChats(req: Request, res: Response): Promise<Response> {

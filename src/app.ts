@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import connectDB from "@/config/database";
-import errorHandler from "@/middlewares/error.middleware";
+import connectDB from "./config/database";
+import errorHandler from "./middlewares/error.middleware";
 import {
   authRouter,
   uploadRouter,
@@ -11,8 +11,8 @@ import {
   fileRouter,
   chatRouter,
   questionsRouter,
-} from "@/routes";
-import { APIResponse } from "@/utils/response";
+} from "./routes";
+import { APIResponse } from "./utils/response";
 
 const app = express();
 

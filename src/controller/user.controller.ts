@@ -1,5 +1,5 @@
-import User from "@/models/user.model";
-import { APIResponse } from "@/utils/response";
+import User from "../models/user.model";
+import { APIResponse } from "../utils/response";
 import { Request, Response } from "express";
 import CustomError from "http-errors";
 

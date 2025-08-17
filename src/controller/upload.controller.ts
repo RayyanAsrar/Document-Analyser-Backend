@@ -1,7 +1,7 @@
-import { downloadUrlSchema, uploadUrlSchema } from "@/schemas/upload.schema";
-import { APIResponse } from "@/utils/response";
-import { getGetSignedUrl, getPutSignedUrl } from "@/utils/s3";
-import validate from "@/utils/validation";
+import { downloadUrlSchema, uploadUrlSchema } from "../schemas/upload.schema";
+import { APIResponse } from "../utils/response";
+import { getGetSignedUrl, getPutSignedUrl } from "../utils/s3";
+import validate from "../utils/validation";
 import { Request, Response } from "express";
 import CustomError from "http-errors";
 

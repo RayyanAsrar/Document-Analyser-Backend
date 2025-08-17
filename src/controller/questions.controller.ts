@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
-import Question from "@/models/questions.model";
-import Chat from "@/models/chat.model";
-import File from "@/models/file.model";
-import { APIResponse } from "@/utils/response";
+import Question from "../models/questions.model";
+import Chat from "../models/chat.model";
+import File from "../models/file.model";
+import { APIResponse } from "../utils/response";
 import { Request, Response } from "express";
 import CustomError from "http-errors";
-import { getGeminiResponse } from "@/services/gemini.service";
-import { getQuestionPrompt } from "@/utils/prompt";
+import { getGeminiResponse } from "../services/gemini.service";
+import { getQuestionPrompt } from "../utils/prompt";
 import { date } from "zod";
-import validate from "@/utils/validation";
-import { questionSchema, questionTextSchema } from "@/schemas/questions.schema";
+import validate from "../utils/validation";
+import { questionSchema, questionTextSchema } from "../schemas/questions.schema";
 import { EditImageResponse } from "@google/genai";
 
 const questionsController = {

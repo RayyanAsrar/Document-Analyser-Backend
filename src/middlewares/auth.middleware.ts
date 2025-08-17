@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import CustomError from "http-errors";
-import { tokenSchema } from "@/schemas/user.schema";
-import { verifyToken } from "@/utils/token";
-import validate from "@/utils/validation";
+import { tokenSchema } from "../schemas/user.schema";
+import { verifyToken } from "../utils/token";
+import validate from "../utils/validation";
 
 export const protect = (
   req: Request,

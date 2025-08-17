@@ -1,7 +1,7 @@
 import { Router } from "express";
-import uploadController from "@/controller/upload.controller";
-import asyncHandler from "@/utils/asyncHandler";
-import { protect } from "@/middlewares/auth.middleware";
+import uploadController from "../controller/upload.controller";
+import asyncHandler from "../utils/asyncHandler";
+import { protect } from "../middlewares/auth.middleware";
 
 const uploadRouter: Router = Router();
 

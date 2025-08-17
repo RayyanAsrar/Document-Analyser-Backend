@@ -1,12 +1,12 @@
 import Chat from "@/models/chat.model";
 import File from "@/models/file.model";
-import { fileSchema } from "@/schemas/file.schema";
-import * as GeminiService from "@/services/gemini.service";
-import { extractPDF } from "@/utils/pdfExtractor";
-import { getSummaryPrompt } from "@/utils/prompt";
-import { APIResponse } from "@/utils/response";
-import { downloadFileFromS3 } from "@/utils/s3";
-import validate from "@/utils/validation";
+import { fileSchema } from "../schemas/file.schema";
+import * as GeminiService from "../services/gemini.service";
+import { extractPDF } from "../utils/pdfExtractor";
+import { getSummaryPrompt } from "../utils/prompt";
+import { APIResponse } from "../utils/response";
+import { downloadFileFromS3 } from "../utils/s3";
+import validate from "../utils/validation";
 import { Request, Response } from "express";
 import CustomError from "http-errors";
 

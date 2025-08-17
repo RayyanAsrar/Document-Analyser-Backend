@@ -1,7 +1,7 @@
 import { Router } from "express";
-import fileController from "@/controller/file.controller";
-import asyncHandler from "@/utils/asyncHandler";
-import { protect } from "@/middlewares/auth.middleware";
+import fileController from "../controller/file.controller";
+import asyncHandler from "../utils/asyncHandler";
+import { protect } from "../middlewares/auth.middleware";
 
 const fileRouter: Router = Router();
 
