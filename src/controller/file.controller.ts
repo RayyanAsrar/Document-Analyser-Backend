@@ -1,5 +1,5 @@
-import Chat from "@/models/chat.model";
-import File from "@/models/file.model";
+import Chat from "../models/chat.model";
+import File from "../models/file.model";
 import { fileSchema } from "../schemas/file.schema";
 import * as GeminiService from "../services/gemini.service";
 import { extractPDF } from "../utils/pdfExtractor";
