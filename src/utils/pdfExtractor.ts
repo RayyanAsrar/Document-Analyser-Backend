@@ -20,9 +20,5 @@ export const extractPDF = async ({
 
   const data = await pdf(fileBuffer)
 
-  if(data.numpages > 2) {
-    throw CustomError(400, "The PDF must be maximum of 2 pages")
-  }
-
   return data;
 };
