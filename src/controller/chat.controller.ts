@@ -136,9 +136,6 @@ const chatController = {
           updatedAt: 1,
         },
       },
-      {
-        $sort: { createdAt: -1 },
-      },
     ]);
 
     const chatData = {
