@@ -41,10 +41,11 @@ const chatController = {
           createdAt: 1,
           updatedAt: 1,
           "file._id": 1,
-          "file.filename": 1,
-          "file.originalName": 1,
+          "file.name": 1,
+          "file.key": 1,
           "file.summary": 1,
           "file.createdAt": 1,
+          "file.size": 1,
         },
       },
       {
@@ -52,7 +53,7 @@ const chatController = {
       },
     ]);
 
-    if (!chats || chats.length === 0) {
+    if (!chats) {
       throw CustomError(404, "Chats not found");
     }
 
@@ -98,10 +99,11 @@ const chatController = {
           createdAt: 1,
           updatedAt: 1,
           "file._id": 1,
-          "file.filename": 1,
-          "file.originalName": 1,
+          "file.name": 1,
+          "file.key": 1,
           "file.summary": 1,
           "file.extractedText": 1,
+          "file.size": 1,
           "file.createdAt": 1,
         },
       },
@@ -133,9 +135,6 @@ const chatController = {
           createdAt: 1,
           updatedAt: 1,
         },
-      },
-      {
-        $sort: { createdAt: -1 },
       },
     ]);
 
