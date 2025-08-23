@@ -53,7 +53,7 @@ const chatController = {
       },
     ]);
 
-    if (!chats || chats.length === 0) {
+    if (!chats) {
       throw CustomError(404, "Chats not found");
     }
 
