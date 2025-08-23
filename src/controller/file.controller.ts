@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Chat from "../models/chat.model";
 import File from "../models/file.model";
 import { fileSchema } from "../schemas/file.schema";
@@ -66,8 +67,35 @@ const fileController = {
   async getAllFiles(req: Request, res: Response): Promise<Response> {
     const { id } = req.user;
 
-    const filters = { isDeleted: false, userID: id };
-    const files = await File.find(filters);
+    const files = await File.aggregate([
+      {
+        $match: { userID: new mongoose.Types.ObjectId(id) },
+      },
+      {
+        $lookup: {
+          from: "chats",
+          localField: "_id",
+          foreignField: "fileID",
+          as: "chat",
+        },
+      },
+      {
+        $unwind: "$chat",
+      },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          key: 1,
+          chat: { _id: "$chat._id" },
+          summary: 1,
+          extractedText: 1,
+          createdAt: 1,
+          updatedAt: 1,
+          userID: 1,
+        },
+      },
+    ]);
 
     if (!files) {
       throw CustomError(400, "Files not Found");
