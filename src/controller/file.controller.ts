@@ -93,7 +93,8 @@ const fileController = {
           createdAt: 1,
           updatedAt: 1,
           userID: 1,
-          size: 1
+          size: 1,
+          contentType: 1
         },
       },
     ]);
