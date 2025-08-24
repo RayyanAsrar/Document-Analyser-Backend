@@ -32,3 +32,25 @@ export const getGeminiResponse = async (prompt: string): Promise<string> => {
     throw new Error(error.message);
   }
 };
+
+export const streamGeminiResponse = async (
+  prompt: string,
+  onChunk: (text: string) => void
+): Promise<void> => {
+  try {
+    const streamingResp = await geminiGenAIClient.models.generateContentStream({
+      model: modelName,
+      contents: prompt,
+    });
+
+    for await (const chunk of streamingResp) {
+      const textChunk = chunk?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      if (textChunk) {
+        onChunk(textChunk);
+      }
+    }
+  } catch (error: any) {
+    console.error("Gemini stream error:", error);
+    throw new Error(error.message);
+  }
+};
